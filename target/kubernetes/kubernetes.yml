@@ -1,0 +1,75 @@
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  annotations:
+    app.quarkus.io/vcs-url: https://github.com/jodagab4/Quarkus-aforo255-security.git
+    app.quarkus.io/build-timestamp: 2020-09-06 - 17:58:53 +0000
+    app.quarkus.io/commit-id: dc8ec98f66bdf7198bf2c621a09ffe01f5069c14
+  labels:
+    app.kubernetes.io/name: aforo255-security
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  name: aforo255-security
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    app.quarkus.io/vcs-url: https://github.com/jodagab4/Quarkus-aforo255-security.git
+    app.quarkus.io/build-timestamp: 2020-09-06 - 17:58:53 +0000
+    app.quarkus.io/commit-id: dc8ec98f66bdf7198bf2c621a09ffe01f5069c14
+  labels:
+    app.kubernetes.io/name: aforo255-security
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  name: aforo255-security
+spec:
+  ports:
+  - name: http
+    port: 8080
+    targetPort: 8080
+  selector:
+    app.kubernetes.io/name: aforo255-security
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    app.quarkus.io/vcs-url: https://github.com/jodagab4/Quarkus-aforo255-security.git
+    app.quarkus.io/build-timestamp: 2020-09-06 - 17:58:53 +0000
+    app.quarkus.io/commit-id: dc8ec98f66bdf7198bf2c621a09ffe01f5069c14
+  labels:
+    app.kubernetes.io/name: aforo255-security
+    app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  name: aforo255-security
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: aforo255-security
+      app.kubernetes.io/version: 1.0.0-SNAPSHOT
+  template:
+    metadata:
+      annotations:
+        app.quarkus.io/vcs-url: https://github.com/jodagab4/Quarkus-aforo255-security.git
+        app.quarkus.io/build-timestamp: 2020-09-06 - 17:58:53 +0000
+        app.quarkus.io/commit-id: dc8ec98f66bdf7198bf2c621a09ffe01f5069c14
+      labels:
+        app.kubernetes.io/name: aforo255-security
+        app.kubernetes.io/version: 1.0.0-SNAPSHOT
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_NAMESPACE
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
+        image: docker.io/jodagab4/aforo255-security:1.0.0-SNAPSHOT
+        imagePullPolicy: IfNotPresent
+        name: aforo255-security
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+      serviceAccount: aforo255-security

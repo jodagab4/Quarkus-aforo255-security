@@ -1,0 +1,5 @@
+aforo255\security\jwt\token\TokenUtils.class
+aforo255\security\jwt\service\TokenService.class
+aforo255\security\jwt\ProfileResource$1.class
+aforo255\security\jwt\JWTExampleResource.class
+aforo255\security\jwt\ProfileResource.class
